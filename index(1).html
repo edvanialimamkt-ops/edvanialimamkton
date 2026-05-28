@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edvânia Lima — Estrategista de Marca</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f7f5f0;
+      --muted: #888;
+      --line: rgba(0,0,0,0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; }
+
+    /* ── BIO ── */
+    .bio { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1.5rem 4rem; }
+    .wrapper { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; opacity: 0; animation: fadeUp 0.9s ease 0.1s forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* avatar com foto */
+    .avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 1px solid var(--ink);
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* fallback caso a imagem não carregue */
+    .avatar::after {
+      content: 'EL';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 300; letter-spacing: 0.04em;
+      background: var(--paper);
+      opacity: 0;
+    }
+    .avatar img[src="SUA_FOTO.jpg"] ~ *,
+    .avatar img:not([src]) { display: none; }
+
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 2.5rem); font-weight: 300; letter-spacing: 0.03em; text-align: center; line-height: 1.15; margin-bottom: 0.5rem; }
+    h1 em { font-style: italic; }
+
+    .tagline { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 0.75rem; }
+
+    .location { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; opacity: 0.7; }
+    .location svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    .divider { width: 32px; height: 1px; background: var(--ink); margin-bottom: 2.5rem; opacity: 0.2; }
+
+    .links { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .link-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.4rem; border: 1px solid var(--line); background: transparent; text-decoration: none; color: var(--ink); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: 'Jost', sans-serif; font-weight: 400; cursor: pointer; transition: color 0.28s; position: relative; overflow: hidden; }
+    .link-item::after { content: ''; position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; z-index: 0; }
+    .link-item:hover::after { transform: scaleX(1); }
+    .link-item:hover { color: var(--paper); border-color: var(--ink); }
+    .link-item span, .link-item svg { position: relative; z-index: 1; }
+    .link-left { display: flex; align-items: center; gap: 10px; }
+    .link-arrow { font-size: 1rem; opacity: 0.35; transition: opacity 0.25s, transform 0.25s; }
+    .link-item:hover .link-arrow { opacity: 1; transform: translateX(4px); }
+    .link-icon { width: 15px; height: 15px; flex-shrink: 0; }
+    .link-item { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .link-item:nth-child(1) { animation-delay: 0.4s; }
+    .link-item:nth-child(2) { animation-delay: 0.5s; }
+    .link-item:nth-child(3) { animation-delay: 0.6s; }
+
+    .scroll-cue { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); opacity: 0.5; animation: fadeUp 0.6s ease 0.9s both; text-decoration: none; transition: opacity 0.2s; }
+    .scroll-cue:hover { opacity: 0.9; }
+    .scroll-cue svg { width: 16px; height: 16px; animation: bounce 1.8s ease-in-out infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+    /* ── SALES ── */
+    .sales { background: var(--ink); color: var(--paper); padding: 6rem 1.5rem 5rem; }
+    .sales-inner { max-width: 640px; margin: 0 auto; }
+    .sales-label { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,245,240,0.4); margin-bottom: 1.2rem; }
+    .sales-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 7vw, 3.2rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+    .sales-title em { font-style: italic; }
+    .sales-intro { font-size: 0.9rem; line-height: 1.85; color: rgba(247,245,240,0.7); margin-bottom: 3.5rem; max-width: 520px; }
+    .for-section { margin-bottom: 3.5rem; }
+    .section-label { font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(247,245,240,0.35); margin-bottom: 1.2rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(247,245,240,0.1); }
+    .for-list { list-style: none; display: flex; flex-direction: column; }
+    .for-list li { font-size: 0.85rem; line-height: 1.7; color: rgba(247,245,240,0.75); padding: 0.75rem 0; border-bottom: 1px solid rgba(247,245,240,0.07); display: flex; align-items: flex-start; gap: 10px; }
+    .for-list li::before { content: '—'; color: rgba(247,245,240,0.25); flex-shrink: 0; margin-top: 1px; }
+    .includes { margin-bottom: 3.5rem; }
+    .includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; border: 1px solid rgba(247,245,240,0.1); }
+    .include-item { padding: 1.4rem 1.2rem; background: rgba(247,245,240,0.03); }
+    .include-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: rgba(247,245,240,0.15); line-height: 1; margin-bottom: 0.5rem; }
+    .include-title { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; color: rgba(247,245,240,0.9); }
+    .include-desc { font-size: 0.78rem; color: rgba(247,245,240,0.45); line-height: 1.6; }
+    .cta-block { border-top: 1px solid rgba(247,245,240,0.12); padding-top: 3rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    .cta-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 4vw, 1.7rem); font-weight: 300; font-style: italic; color: rgba(247,245,240,0.85); line-height: 1.4; max-width: 420px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 1rem 2rem; background: var(--paper); color: var(--ink); font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background 0.25s, color 0.25s; position: relative; overflow: hidden; }
+    .cta-btn::after { content: ''; position: absolute; inset: 0; background: var(--ink); border: 1px solid var(--paper); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .cta-btn:hover::after { transform: scaleX(1); }
+    .cta-btn:hover { color: var(--paper); }
+    .cta-btn span, .cta-btn svg { position: relative; z-index: 1; }
+    .cta-btn svg { width: 14px; height: 14px; }
+
+    .footer { text-align: center; padding: 2rem; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); opacity: 0.45; background: var(--paper); }
+
+    /* instrução de foto — visível só ao abrir o arquivo localmente */
+    .photo-hint { display: none; }
+  </style>
+</head>
+<body>
+
+  <section class="bio" id="topo">
+    <div class="wrapper">
+
+      <!-- 📸 SUBSTITUA "SUA_FOTO.jpg" pelo nome do arquivo da sua foto -->
+      <!-- A foto deve estar na mesma pasta que este arquivo index.html  -->
+      <div class="avatar">
+        <img src="SUA_FOTO.jpg" alt="Foto de Edvânia Lima" />
+      </div>
+
+      <h1>Edvânia <em>Lima</em></h1>
+      <p class="tagline">Estrategista de Marca &amp; Posicionamento</p>
+
+      <p class="location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        Salvador, BA
+      </p>
+
+      <div class="divider"></div>
+
+      <nav class="links" aria-label="Links principais">
+        <a class="link-item" href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener">
+          <span class="link-left">
+            <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            <span>Instagram</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a class="link-item" href="https://wa.me/55SEU_NUMERO" target="_blank" rel="noopener">
+          <span class="link-left">
+            <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            <span>WhatsApp</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a class="link-item" href="#consultoria">
+          <span class="link-left">
+            <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+            <span>Consultoria de Marca</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+      </nav>
+
+      <a class="scroll-cue" href="#consultoria" aria-label="Ver consultoria">
+        Saiba mais
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="sales" id="consultoria">
+    <div class="sales-inner">
+      <p class="sales-label">Consultoria de Marca</p>
+      <h2 class="sales-title">Sua marca precisa ser<br><em>reconhecida, desejada</em><br>e lembrada.</h2>
+      <p class="sales-intro">Trabalho com empreendedoras e profissionais que querem sair da invisibilidade e construir uma marca com identidade sólida, posicionamento claro e mensagem que converte — sem precisar postar todo dia ou copiar ninguém.</p>
+
+      <div class="for-section">
+        <p class="section-label">Para quem é</p>
+        <ul class="for-list">
+          <li>Você sente que sua marca não transmite o valor real do seu trabalho</li>
+          <li>Atrai clientes errados ou precifica abaixo do que merece</li>
+          <li>Não sabe como se diferenciar num mercado saturado</li>
+          <li>Quer crescer com estratégia, não só com sorte ou algoritmo</li>
+        </ul>
+      </div>
+
+      <div class="includes">
+        <p class="section-label">O que está incluído</p>
+        <div class="includes-grid">
+          <div class="include-item">
+            <p class="include-num">01</p>
+            <p class="include-title">Diagnóstico</p>
+            <p class="include-desc">Análise profunda da sua marca atual, posicionamento e percepção de mercado</p>
+          </div>
+          <div class="include-item">
+            <p class="include-num">02</p>
+            <p class="include-title">Estratégia</p>
+            <p class="include-desc">Definição de nicho, proposta de valor única e mensagem central da marca</p>
+          </div>
+          <div class="include-item">
+            <p class="include-num">03</p>
+            <p class="include-title">Posicionamento</p>
+            <p class="include-desc">Como comunicar, para quem falar e como se tornar referência no seu mercado</p>
+          </div>
+          <div class="include-item">
+            <p class="include-num">04</p>
+            <p class="include-title">Plano de ação</p>
+            <p class="include-desc">Próximos passos práticos e claros para aplicar tudo imediatamente</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <p class="cta-text">"Pronta para construir uma marca que trabalha por você?"</p>
+        <a class="cta-btn" href="https://wa.me/55SEU_NUMERO?text=Ol%C3%A1%20Edv%C3%A2nia%2C%20tenho%20interesse%20na%20consultoria%20de%20marca!" target="_blank" rel="noopener">
+          <span>Quero minha consultoria</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">© Edvânia Lima — Salvador, BA</footer>
+
+</body>
+</html>
